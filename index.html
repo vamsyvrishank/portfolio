@@ -1,82 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-52534102-2"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be My Valentine? 💕</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Floating hearts background */
+    .heart-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 30px;
+      animation: float 8s infinite ease-in-out;
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
       }
-      gtag("js", new Date());
 
-      gtag("config", "UA-52534102-2");
-    </script>
+      50% {
+        opacity: 0.8;
+      }
 
-    <meta charset="UTF-8" />
-    <meta name="theme-color" content="#020202" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato|Raleway"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/main.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Vamsy Vrishank</title>
-  </head>
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
 
-  <body>
-    <div class="container">
-      <div id="comingSoon">
-        <div class="profile-image-container">
-          <img
-            src="https://instagram.fmaa8-1.fna.fbcdn.net/v/t51.2885-19/s150x150/84611126_484499139143504_5180398765692944384_n.jpg?_nc_ht=instagram.fmaa8-1.fna.fbcdn.net&_nc_ohc=LBlo3u8xYP8AX9VdTPm&oh=cf6aa4858a585721c0ee8e8ed425ba37&oe=5EC23D49"
-            id="profile-image"
-            alt=""
-          />
-        </div>
-        <p id="name">VAMSY VRISHANK</p>
-        <div id="description">
-          <p>
-            Hi, This is Vamsy Vrishank,3rd year Under-Graduate studying in NIT
-            Trichy
-          </p>
-          <p>
-            I am a Machine Learning enthusiast currently learning Web
-            Development
-          </p>
-          <br />
-          <br />
-          <div id="link-container">
-            <a href="https://www.facebook.com/asmit.kushwaha"
-              ><i class="fab fa-lg fa-facebook"></i
-            ></a>
-            <a href="https://www.instagram.com/vamsy_vrishank/"
-              ><i class="fab fa-lg fa-instagram"></i
-            ></a>
-            <a href="https://www.linkedin.com/in/vamsyvrishank/"
-              ><i class="fab fa-lg fa-linkedin"></i
-            ></a>
-            <a href="mailto:vamsy.vrishank@gmail.com"
-              ><i class="fas fa-lg fa-envelope"></i
-            ></a>
-            <a href="AnnapragadaVamsy_Vrishank_Resume.pdf"
-              ><i class="fas fa-file-pdf"></i></a>
-          </div>
-        </div>
-      </div>
+    /* Question page */
+    #question-page {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      background: white;
+      padding: 60px 50px;
+      border-radius: 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      width: 90%;
+    }
+
+    h1 {
+      color: #e74c3c;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .emoji {
+      font-size: 80px;
+      margin: 20px 0;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    .question {
+      font-size: 1.8em;
+      color: #333;
+      margin: 30px 0;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 40px;
+      position: relative;
+      height: 80px;
+    }
+
+    button {
+      padding: 15px 40px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #yes-btn {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+      color: white;
+    }
+
+    #yes-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(238, 90, 111, 0.4);
+    }
+
+    #no-btn {
+      background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+      color: white;
+      position: absolute;
+      transition: none;
+    }
+
+    /* Celebration page */
+    #celebration-page {
+      display: none;
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      background: white;
+      padding: 60px 50px;
+      border-radius: 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      width: 90%;
+    }
+
+    #celebration-page h1 {
+      color: #e74c3c;
+      font-size: 3em;
+      margin-bottom: 30px;
+    }
+
+    #celebration-page .message {
+      font-size: 1.5em;
+      color: #333;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .celebration-emoji {
+      font-size: 100px;
+      margin: 30px 0;
+      animation: spin 2s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+
+      0%,
+      100% {
+        transform: rotate(-10deg);
+      }
+
+      50% {
+        transform: rotate(10deg);
+      }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      z-index: 5;
+      animation: confetti-fall 4s linear infinite;
+    }
+
+    @keyframes confetti-fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    /* Big hearts for celebration */
+    .big-heart {
+      position: fixed;
+      font-size: 50px;
+      animation: heart-burst 2s ease-out infinite;
+      z-index: 5;
+    }
+
+    @keyframes heart-burst {
+      0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(2) rotate(180deg);
+        opacity: 0;
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Floating hearts background -->
+  <div class="heart-container" id="bg-hearts"></div>
+
+  <!-- Question Page -->
+  <div id="question-page">
+    <div class="emoji">😍</div>
+    <h1>My Dear Bhanu Chan !! </h1>
+    <p class="question">Will you be my Valentine this year ?</p>
+    <div class="buttons">
+      <button id="yes-btn" onclick="showCelebration()">Yes! 💕</button>
+      <button id="no-btn">No</button>
     </div>
-    <div id="particles-js"></div>
-    <script src="js/particles.min.js"></script>
-    <script src="js/index.js"></script>
-  </body>
+  </div>
+
+  <!-- Celebration Page -->
+  <div id="celebration-page">
+    <div class="celebration-emoji">🎉</div>
+    <h1>Yay! 💖</h1>
+    <p class="message">
+      I'm so happy! 😊<br>
+      You've made me the happiest person alive!<br><br>
+      <strong>You'll hear back from your boyfriend soon! 💕</strong>
+    </p>
+    <div class="celebration-emoji">❤️</div>
+  </div>
+
+  <script>
+    // Create floating hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+      heart.style.animationDelay = Math.random() * 2 + 's';
+      heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+      document.getElementById('bg-hearts').appendChild(heart);
+
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    // Generate hearts continuously
+    setInterval(createHeart, 300);
+
+    // Make "No" button run away from mouse
+    const noBtn = document.getElementById('no-btn');
+    const buttonsContainer = document.querySelector('.buttons');
+
+    noBtn.style.left = '200px';
+    noBtn.style.top = '0px';
+
+    noBtn.addEventListener('mouseover', (e) => {
+      const containerRect = buttonsContainer.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = window.innerWidth - btnRect.width - 50;
+      const maxY = window.innerHeight - btnRect.height - 50;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = randomX + 'px';
+      noBtn.style.top = randomY + 'px';
+    });
+
+    // Show celebration page
+    function showCelebration() {
+      document.getElementById('question-page').classList.add('hidden');
+      document.getElementById('celebration-page').style.display = 'block';
+
+      // Create confetti
+      for (let i = 0; i < 100; i++) {
+        setTimeout(() => createConfetti(), i * 30);
+      }
+
+      // Create big hearts
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => createBigHeart(), i * 100);
+      }
+    }
+
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+
+      const colors = ['#ff6b6b', '#ee5a6f', '#f06595', '#cc5de8', '#845ef7', '#5c7cfa', '#339af0', '#22b8cf', '#20c997', '#51cf66', '#94d82d', '#ffd43b', '#ffc078'];
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      confetti.style.animationDelay = Math.random() * 2 + 's';
+
+      document.body.appendChild(confetti);
+
+      setTimeout(() => confetti.remove(), 4000);
+    }
+
+    function createBigHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('big-heart');
+      heart.innerHTML = '💕';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.top = Math.random() * 100 + '%';
+      heart.style.animationDuration = (Math.random() * 1 + 1.5) + 's';
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 2000);
+    }
+  </script>
+</body>
+
 </html>
