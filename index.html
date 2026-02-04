@@ -1,82 +1,838 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-52534102-2"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
 
-      gtag("config", "UA-52534102-2");
-    </script>
-
-    <meta charset="UTF-8" />
-    <meta name="theme-color" content="#020202" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vamsy Vrishank - Quantitative Researcher</title>
+    <meta name="description"
+        content="Portfolio of Vamsy Vrishank, Quantitative Researcher specializing in algorithmic trading and systematic strategies">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato|Raleway"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/main.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Vamsy Vrishank</title>
-  </head>
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&family=Crimson+Pro:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
 
-  <body>
-    <div class="container">
-      <div id="comingSoon">
-        <div class="profile-image-container">
-          <img
-            src="https://instagram.fmaa8-1.fna.fbcdn.net/v/t51.2885-19/s150x150/84611126_484499139143504_5180398765692944384_n.jpg?_nc_ht=instagram.fmaa8-1.fna.fbcdn.net&_nc_ohc=LBlo3u8xYP8AX9VdTPm&oh=cf6aa4858a585721c0ee8e8ed425ba37&oe=5EC23D49"
-            id="profile-image"
-            alt=""
-          />
+<body>
+    <!-- Mathematical Background Canvas -->
+    <canvas id="mathBackground"></canvas>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">AVV</div>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#achievements" class="nav-link">Achievements</a>
+                <a href="#books" class="nav-link">Books</a>
+                <a href="#blog" class="nav-link">Blog</a>
+            </div>
         </div>
-        <p id="name">VAMSY VRISHANK</p>
-        <div id="description">
-          <p>
-            Hi, This is Vamsy Vrishank,3rd year Under-Graduate studying in NIT
-            Trichy
-          </p>
-          <p>
-            I am a Machine Learning enthusiast currently learning Web
-            Development
-          </p>
-          <br />
-          <br />
-          <div id="link-container">
-            <a href="https://www.facebook.com/asmit.kushwaha"
-              ><i class="fab fa-lg fa-facebook"></i
-            ></a>
-            <a href="https://www.instagram.com/vamsy_vrishank/"
-              ><i class="fab fa-lg fa-instagram"></i
-            ></a>
-            <a href="https://www.linkedin.com/in/vamsyvrishank/"
-              ><i class="fab fa-lg fa-linkedin"></i
-            ></a>
-            <a href="mailto:vamsy.vrishank@gmail.com"
-              ><i class="fas fa-lg fa-envelope"></i
-            ></a>
-            <a href="AnnapragadaVamsy_Vrishank_Resume.pdf"
-              ><i class="fas fa-file-pdf"></i></a>
-          </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Quantitative Researcher | Data Engineer | Machine Learning Engineer</div>
+            <h1 class="hero-title">
+                <span class="line">Annapragada</span>
+                <span class="line">Vamsy</span>
+                <span class="line">Vrishank</span>
+            </h1>
+            <p class="hero-subtitle">
+                Welcome, This is a place where I document my learning, research, some revision notes, and evolving ideas
+                in quantitative finance.<br>
+                I enjoy exploring markets and non-market problems through mathematical modeling, data analysis,
+                stochastic calculus and machine learning, constantly experimenting and building new approaches to
+                systematic
+                trading and risk management.
+                <br>
+                Feel free to reach out to me.
+            </p>
+            <!-- <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">3.959</div>
+                    <div class="stat-label">GPA / 4.0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">2.74</div>
+                    <div class="stat-label">Sharpe Ratio</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">6th</div>
+                    <div class="stat-label">Vanguard ETF</div>
+                </div>
+            </div> -->
+            <div class="hero-cta">
+                <a href="Vamsy_Vrishank_Resume_QR.pdf" download class="btn-primary">
+                    <span>Download Resume</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                    </svg>
+                </a>
+                <a href="mailto:avrishan@stevens.edu" class="btn-secondary">Get in Touch</a>
+            </div>
         </div>
-      </div>
-    </div>
-    <div id="particles-js"></div>
-    <script src="js/particles.min.js"></script>
-    <script src="js/index.js"></script>
-  </body>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-main">
+                    <!-- <div class="about-text">
+                        <p>Ex-Software Engineer and Quantitative researcher with a passion for systematic trading
+                            strategies and risk management.
+                            Currently pursuing a Master's in Financial Mathematics at Stevens Institute of Technology,
+                            specializing in algorithmic trading.</p>
+                        <p>My background bridges software engineering and financial engineering. At PayPal, I
+                            built enterprise-scale data pipelines processing petabyte-scale datasets for risk modeling
+                            and fraud detection, analytics and reporting. Now, I'm focused on developing adaptive
+                            volatility-regime frameworks,
+                            dynamic hedging models, and ML-driven trading strategies.</p>
+                        <p>I'm fascinated by the intersection of stochastic calculus, machine learning, and market
+                            microstructure—turning mathematical insights into systematic alpha generation.</p>
+                    </div> -->
+                    <div class="about-text">
+                        <p>I am a Quantitative Researcher driven by love for solving complex problems. My journey
+                            began at <strong>National Institute of Technology,Trichy</strong> and led to
+                            <strong>PayPal</strong>,
+                            where I worked as a Data Engineer tackling data at extreme <strong>volumes</strong>.
+                        </p>
+
+                        <p>While I enjoyed the engineering challenges, I found myself seeking deeper insights within the
+                            data. Now, specializing in <strong>Algorithmic Trading Strategies</strong> through my
+                            <strong>Master's in Financial Engineering at Stevens Institute of Technology</strong>,
+                            I apply that computational intensity to the markets—architecting systematic strategies to
+                            find hopefully long lived signals among the noise.
+                        </p>
+                    </div>
+                    <!-- <div class="contact-card">
+                        <h3>Connect</h3>
+                        <div class="contact-links">
+                            <a href="mailto:avrishan@stevens.edu" class="contact-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
+                                <span>avrishan@stevens.edu</span>
+                            </a>
+                            <a href="https://linkedin.com/in/vamsyvrishank" target="_blank" class="contact-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                </svg>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="https://github.com/vamsyvrishank" target="_blank" class="contact-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="tel:+12019362248" class="contact-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                </svg>
+                                <span>+1 (201) 936-2248</span>
+                            </a>
+                        </div>
+                    </div> -->
+                    <div class="contact-card">
+                        <h3>Connect</h3>
+                        <div class="contact-links">
+                            <a href="mailto:avrishan@stevens.edu" class="contact-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea4335"
+                                    stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
+                                <span>avrishan@stevens.edu</span>
+                            </a>
+
+                            <a href="https://linkedin.com/in/vamsyvrishank" target="_blank" class="contact-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#0077b5">
+                                    <path
+                                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                </svg>
+                                <span>LinkedIn</span>
+                            </a>
+
+                            <a href="https://github.com/vamsyvrishank" target="_blank" class="contact-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#24292e">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                                <span>GitHub</span>
+                            </a>
+
+                            <a href="tel:+12019362248" class="contact-link">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34a853"
+                                    stroke-width="2">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                </svg>
+                                <span>+1 (201) 936-2248</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Section with Logos -->
+                <div class="skills-section">
+                    <h3 class="skills-title">Technical Stack</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                                    alt="Python">
+                            </div>
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+                                    alt="C++">
+                            </div>
+                            <span>C++</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R">
+                            </div>
+                            <span>R</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg"
+                                    alt="MATLAB">
+                            </div>
+                            <span>MATLAB</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                                    alt="SQL">
+                            </div>
+                            <span>SQL</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <img src="https://www.vectorlogo.zone/logos/apache_spark/apache_spark-icon.svg"
+                                    alt="Spark">
+                            </div>
+                            <span>Spark</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg"
+                                    alt="TensorFlow">
+                            </div>
+                            <span>TensorFlow</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z" />
+                                </svg>
+                            </div>
+                            <span>NumPy</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M16.922 11.408l-4.398-2.55c-.229-.132-.523.033-.523.293v5.099c0 .26.294.425.523.293l4.398-2.549c.233-.135.233-.452 0-.586z" />
+                                </svg>
+                            </div>
+                            <span>QuantLib</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <img src="https://www.vectorlogo.zone/logos/google_bigquery/google_bigquery-icon.svg"
+                                    alt="BigQuery">
+                            </div>
+                            <span>BigQuery</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <img src="https://www.vectorlogo.zone/logos/apache_kafka/apache_kafka-icon.svg"
+                                    alt="Kafka">
+                            </div>
+                            <span>Kafka</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                                    alt="Docker">
+                            </div>
+                            <span>Docker</span>
+                        </div>
+                    </div>
+
+                    <h3 class="skills-title">Quantitative Skills</h3>
+                    <div class="quant-skills">
+                        <div class="quant-skill-item">
+                            <span class="quant-icon">∫</span>
+                            <span>Stochastic Calculus</span>
+                        </div>
+                        <div class="quant-skill-item">
+                            <span class="quant-icon">Σ</span>
+                            <span>Time Series Analysis</span>
+                        </div>
+                        <div class="quant-skill-item">
+                            <span class="quant-icon">∂</span>
+                            <span>Derivatives Pricing</span>
+                        </div>
+                        <div class="quant-skill-item">
+                            <span class="quant-icon">σ²</span>
+                            <span>Volatility Modeling</span>
+                        </div>
+                        <div class="quant-skill-item">
+                            <span class="quant-icon">β</span>
+                            <span>Risk Management</span>
+                        </div>
+                        <div class="quant-skill-item">
+                            <span class="quant-icon">μ</span>
+                            <span>Portfolio Optimization</span>
+                        </div>
+                        <div class="quant-skill-item">
+                            <span class="quant-icon">λ</span>
+                            <span>Factor Models</span>
+                        </div>
+                        <div class="quant-skill-item">
+                            <span class="quant-icon">ℙ</span>
+                            <span>Probability Theory</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section education">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Education</h2>
+            </div>
+            <div class="education-timeline">
+                <div class="education-card">
+                    <div class="education-logo">
+                        <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Stevens_Institute_of_Technology_seal.svg/200px-Stevens_Institute_of_Technology_seal.svg.png" -->
+                        <img src="stevens.png" alt="Stevens Institute of Technology">
+                    </div>
+                    <div class="education-content">
+                        <div class="education-header">
+                            <div>
+                                <h3>Stevens Institute of Technology</h3>
+                                <p class="education-degree">Master of Financial Engineering</p>
+                                <p class="education-spec">Algorithmic Trading Strategies Specialization</p>
+                            </div>
+                            <div class="education-meta">
+                                <span class="education-gpa">GPA: 3.959/4.0</span>
+                                <span class="education-date">Jan 2025 – May 2026</span>
+                            </div>
+                        </div>
+                        <div class="courses">
+                            <h4>Relevant Coursework</h4>
+                            <div class="course-tags">
+                                <span class="course-tag">Stochastic Calculus</span>
+                                <span class="course-tag">Algorithmic Trading Strategies</span>
+                                <span class="course-tag">Market Microstructure</span>
+                                <span class="course-tag">Derivatives Pricing</span>
+                                <span class="course-tag">Time Series Analysis</span>
+                                <span class="course-tag">Risk Management</span>
+                                <span class="course-tag">Computational Methods (C++/Python)</span>
+                                <span class="course-tag">Portfolio Theory</span>
+                                <span class="course-tag">Advanced Derivatives</span>
+                                <span class="course-tag">Pricing and Hedging</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-logo">
+                        <!-- <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/NIT_Trichy_Logo.png/150px-NIT_Trichy_Logo.png" -->
+                        <img src="nit_trichy.svg" alt="NIT Trichy">
+                    </div>
+                    <div class="education-content">
+                        <div class="education-header">
+                            <div>
+                                <h3>National Institute of Technology, Trichy</h3>
+                                <p class="education-degree">Bachelor of Technology</p>
+                                <p class="education-spec">Metallurgy, Materials Science & Microeconomics</p>
+                            </div>
+                            <div class="education-meta">
+                                <span class="education-gpa">GPA: 8.01/10.0</span>
+                                <span class="education-date">July 2017 – May 2021</span>
+                            </div>
+                        </div>
+                        <div class="courses">
+                            <h4>Relevant Coursework</h4>
+                            <div class="course-tags">
+                                <span class="course-tag">Forecasting in Microeconomics</span>
+                                <span class="course-tag">Numerical Methods</span>
+                                <span class="course-tag">Fluid Dynamics</span>
+                                <span class="course-tag">Game Theory</span>
+                                <span class="course-tag">Transport Phenomena</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section experience">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Experience</h2>
+            </div>
+            <div class="experience-content">
+                <div class="experience-card">
+                    <div class="experience-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/200px-PayPal.svg.png"
+                            alt="PayPal">
+                    </div>
+                    <div class="experience-details">
+                        <div class="experience-header">
+                            <div>
+                                <h3>Software Engineer | Data Engineer II</h3>
+                                <p class="experience-company">PayPal</p>
+                                <p class="experience-team">Enterprise Data Lake / Quantitative Infrastructure</p>
+                            </div>
+                            <div class="experience-meta">
+                                <span class="experience-location">Bangalore, Karnataka</span>
+                                <span class="experience-date">Sep 2021 – Dec 2024</span>
+                            </div>
+                        </div>
+                        <ul class="experience-points">
+                            <li>Engineered <strong>near-real-time data pipelines</strong> with Google Pub/Sub for
+                                risk-flagged payment transactions, reducing latency <strong>80%</strong> and improving
+                                throughput <strong>30%</strong>, enabling real-time fraud and compliance monitoring.
+                            </li>
+                            <li>Consolidated fragmented data across Braintree, Venmo, and Hyperwallet using
+                                <strong>Reltio MDM</strong> into unified longitudinal datasets, eliminating silos for
+                                risk modeling, fraud detection, and ML recommendations.
+                            </li>
+                            <li>Migrated <strong>petabyte-scale infrastructure</strong> to GCP (BigQuery/Dataproc)
+                                Enterprise Data Lake, enabling consolidated access for analytics and risk modeling while
+                                reducing costs by <strong>$4M+ annually</strong>.</li>
+                            <li>Built <strong>high-concurrency microservice</strong> with connection pooling to track
+                                table refresh states across Oracle and BigQuery, maintaining <strong>100% data
+                                    integrity</strong> across distributed pipelines.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <article class="project-card featured">
+                    <div class="project-visual">
+                        <div class="project-badge">Featured</div>
+                        <div class="math-visual">
+                            <svg viewBox="0 0 200 100" class="volatility-chart">
+                                <path d="M 10,50 Q 30,20 50,50 T 90,50 T 130,30 T 170,60" stroke="var(--color-accent)"
+                                    fill="none" stroke-width="2" />
+                                <circle cx="50" cy="50" r="3" fill="var(--color-accent)" />
+                                <circle cx="90" cy="50" r="3" fill="var(--color-accent)" />
+                                <circle cx="130" cy="30" r="3" fill="var(--color-accent)" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">Adaptive Volatility-Regime Based Execution & Risk Framework</h3>
+                        <span class="project-tag">Python • HMM • CVaR</span>
+                    </div>
+                    <p class="project-description">
+                        Built 3-state Hidden Markov Model with HAR-RV-J forecasting decomposing realized variance into
+                        diffusion/jump components. Integrated Lee-Mykland jump detection and Hawkes flash crash
+                        modeling. Optimized VWAP/TWAP execution sizing with regime-dependent CVaR constraints, achieving
+                        <strong>Sortino 2.41</strong> (vs Sharpe 1.57) on 252-day regime-switching synthetic data.
+                    </p>
+                    <div class="project-meta">
+                        <span class="project-date">2025</span>
+                        <a href="https://github.com/vamsyvrishank/Adaptive-Volatility-Regime-Based-Execution-and-Risk-Framework"
+                            class="project-link">View Details →</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Dynamic Beta Hedging & Replication Model</h3>
+                        <span class="project-tag">Python • Optimization</span>
+                    </div>
+                    <p class="project-description">
+                        Developed Mean-Variance Optimization framework with Two-Fund Separation Theorem to construct
+                        minimum-variance synthetic hedge baskets, isolating idiosyncratic risk from concentrated equity
+                        positions. Implemented closed-form Lagrangian solver for efficient frontier computation.
+                        Achieved <strong>beta neutrality with 30–40% volatility reduction</strong> relative to unhedged
+                        position.
+                    </p>
+                    <div class="project-meta">
+                        <span class="project-date">2025</span>
+                        <a href="https://github.com/vamsyvrishank/Dynamic-Beta-Hedging-Model" class="project-link">View
+                            Details →</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Derivative Pricing Engine</h3>
+                        <span class="project-tag">C++ • Monte Carlo • PDE</span>
+                    </div>
+                    <p class="project-description">
+                        Implemented Black-Scholes, Heston, and SABR models in C++ using Monte Carlo, PDE
+                        (Crank-Nicolson), and binomial/trinomial tree solvers for equity options. Applied Factory and
+                        Strategy design patterns for extensible Greeks computation (Delta, Gamma, Vega) across pricing
+                        methods.
+                    </p>
+                    <div class="project-meta">
+                        <span class="project-date">2025</span>
+                        <a href="https://github.com/vamsyvrishank/Derivatives-Pricing-Engine" class="project-link">View
+                            Details →</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Indicator-Driven Trading Strategies with ML</h3>
+                        <span class="project-tag">Python • Random Forest</span>
+                    </div>
+                    <p class="project-description">
+                        Engineered MACD-RSI rule-based strategy and Random Forest classifier on technical features (EMA,
+                        RSI, PPO, MACD, CMO) to forecast price direction. Optimized entry/exit via out-of-sample Sharpe
+                        ratio and momentum thresholds (δ = 2–15%) across 10 large-cap stocks.
+                    </p>
+                    <div class="project-meta">
+                        <span class="project-date">2025</span>
+                        <a href="https://github.com/vamsyvrishank/Indicator-Driven-Trading-Strategies-with-Machine-Learning"
+                            class="project-link">View Details →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section achievements">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="section-title">Achievements</h2>
+            </div>
+            <div class="achievements-grid">
+                <div class="achievement-card highlight">
+                    <div class="achievement-icon">🏆</div>
+                    <div class="achievement-content">
+                        <h3>Vanguard ETF Portfolio Challenge</h3>
+                        <p class="achievement-detail">Ranked <strong>6th out of 150+ teams</strong> with Sharpe ratio of
+                            <strong>2.74</strong> over 12-week period
+                        </p>
+                        <span class="achievement-year">2025</span>
+                    </div>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">📄</div>
+                    <div class="achievement-content">
+                        <h3>Technical Publication</h3>
+                        <p class="achievement-detail">Authored "Design and Implementation of Connection Pooling APIs in
+                            Distributed Environments" — internally published at PayPal with peer review</p>
+                        <span class="achievement-year">2023</span>
+                    </div>
+                </div>
+
+                <!-- <div class="achievement-card">
+                    <div class="achievement-icon">⭐</div>
+                    <div class="achievement-content">
+                        <h3>SPOT Award</h3>
+                        <p class="achievement-detail">Recognized for innovation in distributed data systems and
+                            inclusion initiatives at PayPal</p>
+                        <span class="achievement-year">2024</span>
+                    </div>
+                </div> -->
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">🥇</div>
+                    <div class="achievement-content">
+                        <h3>DataByte Competition</h3>
+                        <p class="achievement-detail">Ranked <strong>1st</strong> in Data Science Club NIT Trichy
+                            competition — multiclass classification using CNN ensemble</p>
+                        <span class="achievement-year">2021</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section id="books" class="section books">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2 class="section-title">Reading List</h2>
+            </div>
+            <div class="books-intro">
+                <p>Books that shaped my understanding of quantitative finance, trading, and systematic strategies.</p>
+            </div>
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-spine"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">Advances in Financial Machine Learning</h3>
+                        <p class="book-author">Marcos López de Prado</p>
+                        <p class="book-note">Essential framework for ML in finance — fractional differentiation,
+                            meta-labeling, and bet sizing strategies.</p>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-spine"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">Algorithmic Trading & DMA</h3>
+                        <p class="book-author">Barry Johnson</p>
+                        <p class="book-note">Comprehensive guide to market microstructure, execution algorithms, and
+                            direct market access.</p>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-spine"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">Active Portfolio Management</h3>
+                        <p class="book-author">Grinold & Kahn</p>
+                        <p class="book-note">The bible of quantitative portfolio management — information ratio,
+                            transfer coefficient, and alpha forecasting.</p>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-spine"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">Dynamic Hedging</h3>
+                        <p class="book-author">Nassim Taleb</p>
+                        <p class="book-note">Deep dive into options, volatility trading, and risk management from a
+                            practitioner's perspective.</p>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-spine"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">Inside the Black Box</h3>
+                        <p class="book-author">Rishi Narang</p>
+                        <p class="book-note">Demystifying quantitative and algorithmic trading strategies — from alpha
+                            generation to execution.</p>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-spine"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">Stochastic Calculus for Finance II</h3>
+                        <p class="book-author">Steven Shreve</p>
+                        <p class="book-note">Rigorous foundation in continuous-time models, Brownian motion, and
+                            derivatives pricing theory.</p>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-spine"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">Quantitative Trading</h3>
+                        <p class="book-author">Ernest Chan</p>
+                        <p class="book-note">Practical strategies for algorithmic trading — mean reversion, momentum,
+                            and statistical arbitrage.</p>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-spine"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">Market Microstructure in Practice</h3>
+                        <p class="book-author">Lehalle & Laruelle</p>
+                        <p class="book-note">Modern perspective on limit order books, optimal execution, and
+                            high-frequency market making.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section blog">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <h2 class="section-title">Notes & Blog</h2>
+            </div>
+            <div class="blog-intro">
+                <p>Thoughts on quantitative research, market dynamics, and systematic trading strategies.</p>
+            </div>
+            <div class="blog-grid">
+                <article class="blog-card featured-post">
+                    <div class="blog-badge">Latest</div>
+                    <div class="blog-category">Volatility Modeling</div>
+                    <h3 class="blog-title">Understanding Regime-Switching Volatility Models</h3>
+                    <p class="blog-excerpt">
+                        Exploring Hidden Markov Models for volatility regime detection and their applications in
+                        adaptive trading strategies. We examine transition probabilities, state persistence, and
+                        real-world implementation challenges.
+                    </p>
+                    <div class="blog-footer">
+                        <span class="blog-date">Feb 2025</span>
+                        <span class="blog-read-time">8 min read</span>
+                        <a href="blog/regime-switching-volatility.html" class="blog-link">Read Article →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-category">Risk Management</div>
+                    <h3 class="blog-title">CVaR vs VaR: Beyond Traditional Risk Metrics</h3>
+                    <p class="blog-excerpt">
+                        Why Conditional Value-at-Risk (CVaR) provides superior tail risk measurement compared to VaR.
+                        Practical implementation for portfolio optimization and position sizing.
+                    </p>
+                    <div class="blog-footer">
+                        <span class="blog-date">Jan 2025</span>
+                        <span class="blog-read-time">6 min read</span>
+                        <a href="blog/cvar-risk-management.html" class="blog-link">Read Article →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-category">Market Microstructure</div>
+                    <h3 class="blog-title">Jump Detection in High-Frequency Data</h3>
+                    <p class="blog-excerpt">
+                        Implementing Lee-Mykland jump detection methodology. How to distinguish between continuous price
+                        diffusion and discontinuous jumps in tick data.
+                    </p>
+                    <div class="blog-footer">
+                        <span class="blog-date">Jan 2025</span>
+                        <span class="blog-read-time">10 min read</span>
+                        <a href="blog/jump-detection.html" class="blog-link">Read Article →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-category">Portfolio Theory</div>
+                    <h3 class="blog-title">Black-Litterman Model: Theory to Practice</h3>
+                    <p class="blog-excerpt">
+                        Complete walkthrough of the Black-Litterman model for portfolio optimization. Incorporating
+                        investor views with market equilibrium returns.
+                    </p>
+                    <div class="blog-footer">
+                        <span class="blog-date">Dec 2024</span>
+                        <span class="blog-read-time">12 min read</span>
+                        <a href="blog/black-litterman.html" class="blog-link">Read Article →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-category">Machine Learning</div>
+                    <h3 class="blog-title">Feature Engineering for Financial Time Series</h3>
+                    <p class="blog-excerpt">
+                        Beyond technical indicators: creating predictive features from price data, volume patterns, and
+                        order book dynamics for ML models.
+                    </p>
+                    <div class="blog-footer">
+                        <span class="blog-date">Dec 2024</span>
+                        <span class="blog-read-time">7 min read</span>
+                        <a href="blog/feature-engineering.html" class="blog-link">Read Article →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-category">Execution</div>
+                    <h3 class="blog-title">Optimal VWAP Execution Strategies</h3>
+                    <p class="blog-excerpt">
+                        Mathematical framework for Volume-Weighted Average Price execution. Balancing market impact,
+                        timing risk, and implementation shortfall.
+                    </p>
+                    <div class="blog-footer">
+                        <span class="blog-date">Nov 2024</span>
+                        <span class="blog-read-time">9 min read</span>
+                        <a href="blog/vwap-execution.html" class="blog-link">Read Article →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Annapragada Vamsy Vrishank</h3>
+                    <p class="footer-bio">
+                        Quantitative Researcher specializing in algorithmic trading and systematic strategies.
+                        Currently pursuing MFE at Stevens Institute of Technology.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#about" class="footer-link">About</a>
+                        <a href="#education" class="footer-link">Education</a>
+                        <a href="#experience" class="footer-link">Experience</a>
+                        <a href="#projects" class="footer-link">Projects</a>
+                        <a href="#achievements" class="footer-link">Achievements</a>
+                        <a href="#blog" class="footer-link">Blog</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="footer-links">
+                        <a href="mailto:avrishan@stevens.edu" class="footer-link">Email</a>
+                        <a href="https://linkedin.com/in/vamsyvrishank" target="_blank" class="footer-link">LinkedIn</a>
+                        <a href="https://github.com/vamsyvrishank" target="_blank" class="footer-link">GitHub</a>
+                        <a href="Vamsy_Vrishank_Resume_QR_1.pdf" download class="footer-link">Resume</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Annapragada Vamsy Vrishank. All rights reserved.</p>
+                <p class="footer-math">E[R] = Rf + β(E[Rm] - Rf)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
 </html>

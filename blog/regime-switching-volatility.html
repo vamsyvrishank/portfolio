@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Regime-Switching Volatility Models | Vamsy Vrishank</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&family=Crimson+Pro:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="blog-post.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">AVV</a>
+            <div class="nav-links">
+                <a href="../index.html#about" class="nav-link">About</a>
+                <a href="../index.html#projects" class="nav-link">Projects</a>
+                <a href="../index.html#blog" class="nav-link">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Post -->
+    <article class="blog-post">
+        <div class="blog-post-container">
+            <a href="../index.html#blog" class="back-link">← Back to Blog</a>
+
+            <header class="post-header">
+                <div class="post-category">Volatility Modeling</div>
+                <h1 class="post-title">Understanding Regime-Switching Volatility Models</h1>
+                <div class="post-meta">
+                    <span class="post-author">By Vamsy Vrishank</span>
+                    <span class="post-date">February 2025</span>
+                    <span class="post-read-time">8 min read</span>
+                </div>
+            </header>
+
+            <div class="post-content">
+                <p class="lead">
+                    Financial markets exhibit distinct volatility regimes—periods of calm punctuated by turbulent
+                    episodes. Traditional volatility models often fail to capture these shifts. Hidden Markov Models
+                    (HMMs) offer a powerful framework for modeling regime-switching behavior, enabling adaptive trading
+                    strategies that respond to changing market conditions.
+                </p>
+
+                <h2>The Problem with Constant Volatility</h2>
+                <p>
+                    Classical models like Black-Scholes assume constant volatility, but empirical evidence shows
+                    volatility clustering—calm periods followed by volatile ones. GARCH models capture some of this
+                    dynamics, but they struggle with abrupt regime changes seen during market crises.
+                </p>
+
+                <div class="code-block">
+                    <pre><code># Simple GARCH(1,1) - doesn't capture regime switches
+from arch import arch_model
+
+model = arch_model(returns, vol='Garch', p=1, q=1)
+result = model.fit()
+</code></pre>
+                </div>
+
+                <h2>Hidden Markov Models for Volatility</h2>
+                <p>
+                    HMMs model volatility as switching between discrete states (low, medium, high volatility). The model
+                    has two components:
+                </p>
+
+                <ul>
+                    <li><strong>Hidden states:</strong> Unobservable volatility regimes</li>
+                    <li><strong>Transition probabilities:</strong> Likelihood of switching between states</li>
+                    <li><strong>Emission probabilities:</strong> Distribution of returns in each state</li>
+                </ul>
+
+                <div class="math-block">
+                    <p>State transition matrix:</p>
+                    <code>P = [P(S<sub>t+1</sub>=j | S<sub>t</sub>=i)]</code>
+                </div>
+
+                <h2>Implementation with Python</h2>
+                <p>
+                    Here's how to implement a 3-state HMM for volatility modeling using <code>hmmlearn</code>:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>import numpy as np
+from hmmlearn import hmm
+
+# Prepare returns data
+returns = df['returns'].values.reshape(-1, 1)
+
+# Initialize 3-state Gaussian HMM
+model = hmm.GaussianHMM(
+    n_components=3,
+    covariance_type='full',
+    n_iter=1000
+)
+
+# Fit model
+model.fit(returns)
+
+# Predict hidden states
+hidden_states = model.predict(returns)
+
+# Get transition matrix
+print(model.transmat_)
+</code></pre>
+                </div>
+
+                <h2>HAR-RV-J: Incorporating Jump Components</h2>
+                <p>
+                    The Heterogeneous Autoregressive model with Realized Volatility and Jumps (HAR-RV-J) decomposes
+                    variance into continuous and jump components:
+                </p>
+
+                <div class="math-block">
+                    <code>RV<sub>t</sub> = β<sub>0</sub> + β<sub>D</sub>RV<sub>t-1</sub> + β<sub>W</sub>RV<sub>t-5:t-1</sub> + β<sub>M</sub>RV<sub>t-22:t-1</sub> + β<sub>J</sub>J<sub>t-1</sub></code>
+                </div>
+
+                <h2>Lee-Mykland Jump Detection</h2>
+                <p>
+                    To identify jumps, we use the Lee-Mykland test statistic comparing realized returns to expected
+                    diffusion:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>def detect_jumps(returns, window=252, threshold=4.5):
+    """Lee-Mykland jump detection"""
+    
+    # Calculate bipower variation
+    bv = np.abs(returns[:-1]) * np.abs(returns[1:])
+    bv = np.sqrt(np.pi/2) * np.mean(bv)
+    
+    # Test statistic
+    L = (returns / np.sqrt(bv)) 
+    
+    # Identify jumps
+    jumps = np.abs(L) > threshold
+    
+    return jumps
+</code></pre>
+                </div>
+
+                <h2>Practical Applications</h2>
+                <p>
+                    Regime-switching models enable several trading applications:
+                </p>
+
+                <ol>
+                    <li><strong>Dynamic Position Sizing:</strong> Reduce exposure in high-volatility regimes</li>
+                    <li><strong>Execution Optimization:</strong> Adjust VWAP schedules based on expected volatility</li>
+                    <li><strong>Risk Management:</strong> Regime-dependent CVaR constraints</li>
+                    <li><strong>Options Trading:</strong> Volatility regime forecasts for straddle strategies</li>
+                </ol>
+
+                <h2>Results from My Framework</h2>
+                <p>
+                    In my adaptive execution framework, I achieved:
+                </p>
+
+                <ul>
+                    <li>Sortino ratio of <strong>2.41</strong> vs 1.57 for fixed-volatility baseline</li>
+                    <li>30% reduction in execution costs during high-volatility regimes</li>
+                    <li>92% regime classification accuracy on out-of-sample data</li>
+                </ul>
+
+                <h2>Key Takeaways</h2>
+                <p>
+                    Regime-switching volatility models provide a more realistic framework for market dynamics. By
+                    combining HMMs with jump detection and realized volatility measures, we can build adaptive systems
+                    that respond intelligently to changing market conditions.
+                </p>
+
+                <p>
+                    The key is not just detecting regimes, but using that information to dynamically adjust trading
+                    parameters—position sizes, execution strategies, and risk limits.
+                </p>
+
+                <div class="post-cta">
+                    <p><strong>Want to discuss this further?</strong> <a href="mailto:avrishan@stevens.edu">Get in
+                            touch</a></p>
+                </div>
+            </div>
+
+            <footer class="post-footer">
+                <div class="post-tags">
+                    <span class="tag">Volatility Modeling</span>
+                    <span class="tag">Hidden Markov Models</span>
+                    <span class="tag">Jump Detection</span>
+                    <span class="tag">Python</span>
+                </div>
+                <div class="post-nav">
+                    <a href="../index.html#blog" class="post-nav-link">← All Posts</a>
+                    <a href="cvar-risk-management.html" class="post-nav-link">Next Post →</a>
+                </div>
+            </footer>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Annapragada Vamsy Vrishank</h3>
+                    <p class="footer-bio">
+                        Quantitative Researcher specializing in algorithmic trading and systematic strategies.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="footer-links">
+                        <a href="mailto:avrishan@stevens.edu" class="footer-link">Email</a>
+                        <a href="https://linkedin.com/in/vamsyvrishank" target="_blank" class="footer-link">LinkedIn</a>
+                        <a href="https://github.com/vamsyvrishank" target="_blank" class="footer-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Annapragada Vamsy Vrishank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
