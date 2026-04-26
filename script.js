@@ -93,11 +93,12 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
+    const isLightMode = document.documentElement.classList.contains('light-mode');
     
     if (currentScroll > 100) {
-        nav.style.background = 'rgba(10, 10, 10, 0.95)';
+        nav.style.background = isLightMode ? 'rgba(236, 236, 236, 0.95)' : 'rgba(10, 10, 10, 0.95)';
     } else {
-        nav.style.background = 'rgba(10, 10, 10, 0.8)';
+        nav.style.background = isLightMode ? 'rgba(236, 236, 236, 0.8)' : 'rgba(10, 10, 10, 0.8)';
     }
     
     lastScroll = currentScroll;
@@ -349,3 +350,27 @@ document.addEventListener('keydown', (e) => {
         window.scrollBy({ top: -window.innerHeight * 0.5, behavior: 'smooth' });
     }
 });
+
+// Theme Toggle
+const themeToggle = document.getElementById('theme-toggle');
+if (themeToggle) {
+    if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.classList.add('light-mode');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('light-mode');
+        if (document.documentElement.classList.contains('light-mode')) {
+            localStorage.setItem('theme', 'light');
+        } else {
+            localStorage.setItem('theme', 'dark');
+        }
+        
+        // Update nav background immediately if it is scrolled
+        if (window.pageYOffset > 100) {
+            nav.style.background = document.documentElement.classList.contains('light-mode') ? 'rgba(236, 236, 236, 0.95)' : 'rgba(10, 10, 10, 0.95)';
+        } else {
+            nav.style.background = document.documentElement.classList.contains('light-mode') ? 'rgba(236, 236, 236, 0.8)' : 'rgba(10, 10, 10, 0.8)';
+        }
+    });
+}

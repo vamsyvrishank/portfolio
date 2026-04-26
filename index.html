@@ -31,6 +31,19 @@
                 <a href="#achievements" class="nav-link">Achievements</a>
                 <a href="#books" class="nav-link">Books</a>
                 <a href="#blog" class="nav-link">Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle themes" style="background:none;border:none;color:var(--color-text);cursor:pointer;display:flex;align-items:center;margin-left:1rem;">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
@@ -706,6 +719,19 @@
             <div class="blog-grid">
                 <article class="blog-card featured-post">
                     <div class="blog-badge">Latest</div>
+                    <div class="blog-category">Machine Learning</div>
+                    <h3 class="blog-title">Why Inference is Hard and What is Inference</h3>
+                    <p class="blog-excerpt">
+                        While training gets the spotlight, model inference—the actual deployment to make predictions—is often the hardest engineering challenge. Discover why latency, throughput, and memory constraints make inference difficult in AI pipelines.
+                    </p>
+                    <div class="blog-footer">
+                        <span class="blog-date">Apr 2026</span>
+                        <span class="blog-read-time">7 min read</span>
+                        <a href="blog/why-inference-is-hard.html" class="blog-link">Read Article →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
                     <div class="blog-category">Volatility Modeling</div>
                     <h3 class="blog-title">Understanding Regime-Switching Volatility Models</h3>
                     <p class="blog-excerpt">

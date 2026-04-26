@@ -1234,3 +1234,36 @@ body {
         grid-column: 1;
     }
 }
+
+/* Light Mode Variables */
+html.light-mode {
+    --color-bg: #ececec;
+    --color-surface: #fdfdfd;
+    --color-text: #222222;
+    --color-text-muted: #555555;
+    --color-border: #cccccc;
+    --color-accent: #008f4c;
+    --color-accent-dim: #00aa55;
+}
+
+html.light-mode .nav {
+    background: rgba(236, 236, 236, 0.8) !important;
+}
+
+html.light-mode #mathBackground {
+    opacity: 0.15;
+}
+
+html.light-mode .hero {
+    background: 
+        linear-gradient(180deg, transparent 0%, var(--color-bg) 100%),
+        radial-gradient(ellipse at top, rgba(0, 143, 76, 0.05) 0%, transparent 60%);
+}
+
+html.light-mode .contact-card svg {
+    filter: none;
+}
+
+html.light-mode .experience-logo img {
+    filter: brightness(0);
+}

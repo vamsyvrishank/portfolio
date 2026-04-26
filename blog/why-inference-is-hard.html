@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Inference is Hard and What is Inference | Vamsy Vrishank</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&family=Crimson+Pro:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="blog-post.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">AVV</a>
+            <div class="nav-links">
+                <a href="../index.html#about" class="nav-link">About</a>
+                <a href="../index.html#projects" class="nav-link">Projects</a>
+                <a href="../index.html#blog" class="nav-link">Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle themes" style="background:none;border:none;color:var(--color-text);cursor:pointer;display:flex;align-items:center;margin-left:1rem;">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Post -->
+    <article class="blog-post">
+        <div class="blog-post-container">
+            <a href="../index.html#blog" class="back-link">← Back to Blog</a>
+
+            <header class="post-header">
+                <div class="post-category">Machine Learning</div>
+                <h1 class="post-title">Why Inference is Hard and What is Inference</h1>
+                <div class="post-meta">
+                    <span class="post-author">By Vamsy Vrishank</span>
+                    <span class="post-date">April 2026</span>
+                    <span class="post-read-time">7 min read</span>
+                </div>
+            </header>
+
+            <div class="post-content">
+                <p class="lead">
+                    While training gets most of the spotlight, model inference—the actual deployment and utilization of a trained model to make predictions—is often where the hardest engineering challenges lie. Transitioning from a Jupyter notebook to a high-throughput, low-latency production pipeline is notoriously difficult.
+                </p>
+
+                <h2>What is Inference?</h2>
+                <p>
+                    In machine learning, <strong>inference</strong> is the process of passing live data through a trained model to obtain predictions, classifications, or generated content. While training is about finding the optimal weights to minimize a loss function, inference is about using those fixed weights to evaluate new, unseen data efficiently.
+                </p>
+
+                <p>
+                    For AI pipelines (especially generative models like LLMs), inference involves complex sampling processes such as beam search or autoregressive token generation, multiplying the computational overhead.
+                </p>
+
+                <h2>Why Inference is Exceptionally Hard</h2>
+                <p>
+                    When deploying machine learning systems in real-world environments (from algorithmic trading engines to large-scale recommendation systems), engineers face a perfect storm of operational hurdles:
+                </p>
+
+                <h3>1. The Latency vs. Throughput Trade-off</h3>
+                <p>
+                    In many applications (like high-frequency trading), latency (time to single prediction) is critical. In big-data processing, throughput (predictions per second) is king. 
+                    Batching requests improves throughput and GPU utilization but introduces latency. Balancing this trade-off requires dynamic batching servers (e.g., Triton Inference Server, vLLM).
+                </p>
+
+                <div class="code-block">
+                    <pre><code># Dynamic batching concept pseudocode
+async def handle_request(req):
+    # Add to current batch queue
+    future = batch_queue.submit(req)
+    # Wait for the batch processor to execute
+    return await future</code></pre>
+                </div>
+
+                <h3>2. Hardware and Memory Constraints</h3>
+                <p>
+                    Modern LLMs run into a significant bottleneck: <strong>memory bandwidth</strong>. Autoregressive generation processes sequence lengths that eat up VRAM extremely fast (KV-cache). If you can't fit the model and its cache in GPU memory, you face catastrophic performance drops due to offloading to CPU RAM or disk.
+                </p>
+
+                <h3>3. Pipeline Complexity and Data Drift</h3>
+                <p>
+                    Inference isn't just a <code>model.predict()</code> call. It's a pipeline that includes:
+                </p>
+                <ul>
+                    <li>Real-time fetching of auxiliary features from a feature store</li>
+                    <li>Pre-processing data exactly as it was during training (skew is a common pitfall)</li>
+                    <li>The forward pass of the model</li>
+                    <li>Post-processing and business-logic application</li>
+                </ul>
+
+                <h2>Optimizations for AI Pipelines</h2>
+                <p>
+                    To tackle these challenges, the industry has developed several optimization techniques tailored for ML and AI models:
+                </p>
+
+                <ol>
+                    <li><strong>Quantization:</strong> Reducing the precision of network weights from FP32 to INT8 or even INT4 to save memory bandwidth.</li>
+                    <li><strong>Model Compilation:</strong> Using tools like TensorRT, ONNX Runtime, or OpenVINO to fuse kernel operations and optimize execution graphs for specific hardware.</li>
+                    <li><strong>PagedAttention for LLMs:</strong> Treating KV-cache like virtual memory to avoid fragmentation and allow larger burst batching without out-of-memory errors.</li>
+                </ol>
+
+                <div class="math-block">
+                    <p>Memory requirement estimation for transformer inference:</p>
+                    <code>M<sub>bytes</sub> ≈ (2 * P * V) + (2 * B * S * L * H)</code>
+                    <p>Where P = params, V = bytes/param, B = batch size, S = sequence length, L = layers, H = hidden dims.</p>
+                </div>
+
+
+                <h2>Key Takeaways</h2>
+                <p>
+                    Treating model serving as an afterthought is a recipe for disaster. Inference systems require robust systems engineering, careful memory profiling, and dynamic optimization. As AI models continue to scale, the gap between training a model and successfully inferring from it will define the boundary between research and real-world impact.
+                </p>
+
+                <div class="post-cta">
+                    <p><strong>Want to discuss this further?</strong> <a href="mailto:avrishan@stevens.edu">Get in touch</a></p>
+                </div>
+            </div>
+
+            <footer class="post-footer">
+                <div class="post-tags">
+                    <span class="tag">Machine Learning</span>
+                    <span class="tag">System Design</span>
+                    <span class="tag">LLM Inference</span>
+                    <span class="tag">Optimization</span>
+                </div>
+                <div class="post-nav">
+                    <a href="../index.html#blog" class="post-nav-link">← All Posts</a>
+                </div>
+            </footer>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Annapragada Vamsy Vrishank</h3>
+                    <p class="footer-bio">
+                        Quantitative Researcher specializing in algorithmic trading and systematic strategies.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="footer-links">
+                        <a href="mailto:avrishan@stevens.edu" class="footer-link">Email</a>
+                        <a href="https://linkedin.com/in/vamsyvrishank" target="_blank" class="footer-link">LinkedIn</a>
+                        <a href="https://github.com/vamsyvrishank" target="_blank" class="footer-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Annapragada Vamsy Vrishank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+
+</html>
