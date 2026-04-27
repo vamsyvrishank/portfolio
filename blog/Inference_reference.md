@@ -6,7 +6,7 @@ Once a model leaves the notebook, the engineering problem changes completely. We
 
 This post is a structured map of how production inference works, from a fraud-scoring XGBoost model running on CPU to a 70B-parameter LLM serving streaming tokens across a GPU cluster. It's the reference doc I wish existed when I started looking into this seriously.
 
----
+
 
 ## How to read this guide
 
@@ -30,7 +30,7 @@ graph TD
     D --> D2[FPGA / ASIC / NPU]
 ```
 
----
+
 
 ## Foundations
 
@@ -55,7 +55,7 @@ We cannot maximize all four. Quantization trades quality for cost and latency. B
 
 A useful rule of thumb: **figure out the binding constraint first.** A real-time fraud model might have a hard 50ms ceiling, here latency is the constraint, optimize everything else around it. A nightly batch job has 8 hours, here throughput-per-dollar wins. A consumer chatbot has both a TTFT (Time to First Token) budget and a margin target, that's why it's hard.
 
----
+
 
 ## Workload Types
 
@@ -101,7 +101,6 @@ graph LR
 
 The point of this diagram: the same model can power four different systems, and the engineering looks nothing alike across them.
 
----
 
 ## Hardware
 
@@ -146,9 +145,9 @@ def pick_hardware(model_type, model_size_gb, speed_requirement):
     return "GPU if it fits strictly in VRAM, else CPU"
 ```
 
-This is rough on purpose — the real decision involves ecosystem maturity, ops familiarity, and what your cloud provider charges you on a Tuesday.
+This is rough, the real decision involves ecosystem maturity, ops familiarity, and what your cloud provider charges you on a random Tuesday.
 
----
+
 
 ## Classical ML Inference
 
@@ -194,7 +193,7 @@ FastAPI for simple stuff, BentoML and Seldon for more structure, KServe on Kuber
 
 Not everything needs a transformer. Most things still don't.
 
----
+
 
 ## LLM and Generative Inference
 
@@ -276,18 +275,20 @@ Old way (static batching): collect requests into a batch of 8, run them together
 
 New way (continuous / in-flight batching): the scheduler operates at the token level. As soon as one request finishes, a new one slots into its place, **mid-batch**. The GPU stays full.
 
+**Static Batching (old)**
 ```mermaid
 graph TD
-    subgraph Static["Static Batching (old)"]
-        S1[T0: Start 4 reqs] --> S2[T1: 3 done, 1 still running]
-        S2 --> S3[T2: GPU idle on 3 slots]
-        S3 --> S4[T3: Last finishes, batch returns]
-    end
-    subgraph Continuous["Continuous Batching (new)"]
-        C1[T0: Start 4 reqs] --> C2[T1: 1 finishes, new req slots in]
-        C2 --> C3[T2: another finishes, another slots in]
-        C3 --> C4[GPU stays full]
-    end
+    S1[T0: Start 4 reqs] --> S2[T1: 3 done, 1 still running]
+    S2 --> S3[T2: GPU idle on 3 slots]
+    S3 --> S4[T3: Last finishes, batch returns]
+```
+
+**Continuous Batching (new)**
+```mermaid
+graph TD
+    C1[T0: Start 4 reqs] --> C2[T1: 1 finishes, new req slots in]
+    C2 --> C3[T2: another finishes, another slots in]
+    C3 --> C4[GPU stays full]
 ```
 
 This was a ~10x throughput win when vLLM popularized it. Single biggest serving improvement of the last few years.
@@ -322,7 +323,7 @@ A 1M-token context window doesn't come for free. Attention is O(n²), so going f
 | **TGI** | HuggingFace's serving stack. Solid, integrated with the HF ecosystem. |
 | **llama.cpp** | The edge/local king. Quantized inference on CPUs and Apple Silicon. |
 
----
+
 
 ## Optimization Techniques
 
@@ -357,7 +358,7 @@ Train a small "student" model to imitate a big "teacher" model's outputs. The st
 
 Instead of one giant dense network, build N "expert" subnetworks and a router that picks the top-k for each token. A 600B-parameter MoE might activate only 30B parameters per token. You get the quality of a huge model at the compute cost of a small one.
 
-Catch: you still pay the *memory* cost. All N experts have to be loaded somewhere. MoE serving is its own discipline — expert parallelism, routing-aware batching, handling the long tail of rarely-activated experts.
+Catch: you still pay the *memory* cost. All N experts have to be loaded somewhere. MoE serving is its own discipline such as expert parallelism, routing-aware batching, handling the long tail of rarely-activated experts.
 
 ### Caching
 
@@ -383,7 +384,7 @@ When the model doesn't fit on one GPU:
 
 Real systems combine these. A 70B model serving might use 4-way tensor parallel, a 600B MoE might use 8-way tensor + 8-way expert parallel.
 
----
+
 
 ## System Design of Production Inference
 
@@ -446,7 +447,7 @@ $/1M tokens = (GPU $/hour) / (tokens/sec × 3600) × 1,000,000
 
 A H100 at ~$3/hr generating 1500 tokens/sec on a quantized 70B model gives ~$0.55/1M tokens. The same GPU running a poorly-batched FP16 setup at 200 tokens/sec gives ~$4.20/1M tokens. **Same hardware, same model, 8x cost difference, all from serving optimization.** This is the entire reason inference engineering is a real job.
 
----
+
 
 ## Compound Inference Systems
 
@@ -487,7 +488,7 @@ An agent loop is N sequential model calls plus tool calls. If each call is 1 sec
 
 Reasoning models (the o-series style) trade more inference compute for better answers — they "think" by generating long internal chains before responding. This breaks the old cost model: a single query might consume 10,000 internal tokens to produce a 200-token answer. Serving these economically is an open problem and a hot area.
 
----
+
 
 ## Where the field is going
 
@@ -499,7 +500,6 @@ Three trends worth tracking:
 
 For data engineers, quants, and infrastructure people: the bridge from existing skills (data systems, low-latency serving, cost engineering) to inference platform work is shorter than it looks. The people who understand both feature stores *and* paged attention are rare. Worth becoming one of them.
 
----
 
 ## References
 

@@ -963,7 +963,6 @@ body {
 }
 
 .blog-card.featured-post {
-    grid-column: 1 / -1;
     border: 1px solid var(--color-accent);
     background: linear-gradient(135deg, rgba(0, 255, 136, 0.03) 0%, transparent 100%);
 }
@@ -1230,9 +1229,7 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .blog-card.featured-post {
-        grid-column: 1;
-    }
+
 }
 
 /* Light Mode Variables */
