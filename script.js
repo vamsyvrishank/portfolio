@@ -14,15 +14,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Mathematical Background Canvas
 const canvas = document.getElementById('mathBackground');
-const ctx = canvas.getContext('2d');
+let ctx = null;
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = document.body.scrollHeight;
+if (canvas) {
+    ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = document.body.scrollHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 }
-
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
 
 const equations = [
     'dS/dt = μS + σSdW',
@@ -72,11 +76,14 @@ class MathParticle {
     }
 }
 
-for (let i = 0; i < numParticles; i++) {
-    particles.push(new MathParticle());
+if (canvas) {
+    for (let i = 0; i < numParticles; i++) {
+        particles.push(new MathParticle());
+    }
 }
 
 function animateBackground() {
+    if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(particle => {
         particle.update();
@@ -85,7 +92,9 @@ function animateBackground() {
     requestAnimationFrame(animateBackground);
 }
 
-animateBackground();
+if (canvas) {
+    animateBackground();
+}
 
 // Navbar background on scroll
 const nav = document.querySelector('.nav');
@@ -352,12 +361,12 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Theme Toggle
+if (localStorage.getItem('theme') === 'light') {
+    document.documentElement.classList.add('light-mode');
+}
+
 const themeToggle = document.getElementById('theme-toggle');
 if (themeToggle) {
-    if (localStorage.getItem('theme') === 'light') {
-        document.documentElement.classList.add('light-mode');
-    }
-    
     themeToggle.addEventListener('click', () => {
         document.documentElement.classList.toggle('light-mode');
         if (document.documentElement.classList.contains('light-mode')) {

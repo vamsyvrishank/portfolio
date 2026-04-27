@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Reader | Vamsy Vrishank</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&family=Crimson+Pro:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="blog-post.css">
+    
+    <!-- Highlight.js for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Highlight.js Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        /* Specific overrides for markdown conversion */
+        #md-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin: 2rem 0;
+            border: 1px solid var(--color-border);
+        }
+        
+        #md-content pre {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-left: 3px solid var(--color-accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+
+        #md-content pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        .mermaid {
+            text-align: center;
+            margin: 2.5rem 0;
+            background: transparent; /* Adapt well with math gradients */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">AVV</a>
+            <div class="nav-links">
+                <a href="../index.html#about" class="nav-link">About</a>
+                <a href="../index.html#projects" class="nav-link">Projects</a>
+                <a href="../index.html#blog" class="nav-link">Blog</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle themes" style="background:none;border:none;color:var(--color-text);cursor:pointer;display:flex;align-items:center;margin-left:1rem;">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Post Container -->
+    <article class="blog-post">
+        <div class="blog-post-container">
+            <a href="../index.html#blog" class="back-link">← Back to Blog</a>
+
+            <div id="loading-indicator" class="post-content" style="text-align: center; margin-top: 4rem;">
+                <p>Loading Markdown Content...</p>
+            </div>
+
+            <!-- Parsed Markdown Injects Here -->
+            <div id="md-content" class="post-content" style="display: none;"></div>
+
+            <footer class="post-footer">
+                <div class="post-nav" style="justify-content: center;">
+                    <a href="../index.html#blog" class="post-nav-link">← Return to All Posts</a>
+                </div>
+            </footer>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Annapragada Vamsy Vrishank</h3>
+                    <p class="footer-bio">
+                        Quantitative Researcher specializing in algorithmic trading and systematic strategies.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="footer-links">
+                        <a href="mailto:avrishan@stevens.edu" class="footer-link">Email</a>
+                        <a href="https://linkedin.com/in/vamsyvrishank" target="_blank" class="footer-link">LinkedIn</a>
+                        <a href="https://github.com/vamsyvrishank" target="_blank" class="footer-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Annapragada Vamsy Vrishank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Global Website Scripts -->
+    <script src="../script.js"></script>
+
+    <!-- Markdown Engine Processing -->
+    <script>
+        // Initialization for Mermaid Theme
+        const currentTheme = localStorage.getItem('theme') === 'light' ? 'default' : 'dark';
+        mermaid.initialize({ startOnLoad: false, theme: currentTheme });
+
+        // Initialization for Marked.js parsing + Highlight.js support
+        marked.use({
+            breaks: true,
+            gfm: true,
+            renderer: {
+                code(token) {
+                    if (token.lang === 'mermaid') {
+                        return '<div class="mermaid">' + token.text + '</div>';
+                    }
+                    if (token.lang) {
+                        const validLanguage = hljs.getLanguage(token.lang) ? token.lang : 'plaintext';
+                        const highlighted = hljs.highlight(token.text, { language: validLanguage }).value;
+                        return '<pre><code class="hljs ' + validLanguage + '">' + highlighted + '</code></pre>';
+                    }
+                    return '<pre><code>' + token.text + '</code></pre>';
+                }
+            }
+        });
+
+
+        // URL Parameters reading logic
+        const urlParams = new URLSearchParams(window.location.search);
+        const postName = urlParams.get('post');
+        const container = document.getElementById('md-content');
+        const loading = document.getElementById('loading-indicator');
+
+        if (!postName) {
+            loading.style.display = 'none';
+            container.style.display = 'block';
+            container.innerHTML = "<h2>Error</h2><p>No post parameter found. Ensure URL ends with <code>?post=filename</code>.</p>";
+        } else {
+            // Initiate HTTP Fetch request to get raw markdown
+            fetch(`${postName}.md`)
+                .then(response => {
+                    if (!response.ok) throw new Error("Could not find the requested file.");
+                    return response.text();
+                })
+                .then(markdownText => {
+                    // Run Markdown conversion pipeline
+                    const htmlResult = marked.parse(markdownText);
+                    loading.style.display = 'none';
+                    container.style.display = 'block';
+                    container.innerHTML = htmlResult;
+
+                    // Trigger Mermaid flow diagrams pass over the injected DOM
+                    mermaid.run({ querySelector: '.mermaid' });
+                    
+                    // Force the Page title to switch
+                    const possibleTitle = document.querySelector("#md-content h1");
+                    if (possibleTitle) {
+                        document.title = possibleTitle.innerText + " | Vamsy Vrishank";
+                    }
+                })
+                .catch(error => {
+                    loading.style.display = 'none';
+                    container.style.display = 'block';
+                    container.innerHTML = `<h2>Loading Error</h2><p style="color: red;">${error.message}</p><p>Attempted to locate <strong>${postName}.md</strong> in current folder.</p>`;
+                });
+        }
+    </script>
+</body>
+
+</html>
